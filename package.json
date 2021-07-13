@@ -1,0 +1,25 @@
+{
+  "name": "bookself",
+  "version": "0.0.1",
+  "description": "This is a web app that helps you organize and read all your books from almost any device.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtaKon/bookself.git"
+  },
+  "keywords": [
+    "bookself",
+    "pdf",
+    "mean",
+    "stack"
+  ],
+  "author": "AtaKon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AtaKon/bookself/issues"
+  },
+  "homepage": "https://github.com/AtaKon/bookself#readme"
+}
