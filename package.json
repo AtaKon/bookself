@@ -21,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/AtaKon/bookself/issues"
   },
-  "homepage": "https://github.com/AtaKon/bookself#readme"
+  "homepage": "https://github.com/AtaKon/bookself#readme",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.2"
+  }
 }
