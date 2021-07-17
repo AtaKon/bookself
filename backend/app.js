@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose =require('mongoose');
 const chalk = require('chalk');
@@ -9,7 +10,7 @@ const booksRoute=require('./routes/books');
 
 const app = express();
 
-mongoose.connect("mongodb://localhost:27017/Bookself?readPreference=primary&appname=MongoDB%20Compass%20Community&ssl=false",{ useNewUrlParser: true,useFindAndModify: false,useUnifiedTopology: true })
+mongoose.connect(process.env.mongoURL,{ useNewUrlParser: true,useFindAndModify: false,useUnifiedTopology: true })
 .then(()=>{
   log(chalk.green("Connected to database!"));
 })

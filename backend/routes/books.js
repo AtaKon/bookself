@@ -1,6 +1,8 @@
+require('dotenv').config();
 const express = require("express");
 const fs = require("fs")
 const path = require("path");
+const axios = require('axios');
 
 
 const Book=require('../models/books');
@@ -17,6 +19,20 @@ router.get('/',(req,res,next)=>{
     }).catch((error)=>{
         res.status(500).json({message:"Something went wrong!",error:error});
     });
+});
+
+router.get('/getInfo/:name',(req,res,next) => {
+  console.log(process.env.key)
+
+  axios.get('https://www.googleapis.com/books/v1/volumes?q='+req.params.name+'&key='+process.env.key)
+  .then(response=>{
+   console.log(response.data)
+   res.status(200).json({message:'OK',books:response.data})
+  }).catch(error=>{
+    res.status(500).json({message:'Something is wrong!',books:error})
+  });
+
+  
 });
 
 module.exports=router;
