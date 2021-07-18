@@ -35,10 +35,15 @@ router.get('/getInfo/:name',(req,res,next) => {
   
 });
 
+router.get('/fill',(req,res,next)=>{
+  let fileTree = getAllFiles(process.env.path);
+  res.status(200).json({message:"ok"})
+});
+
 module.exports=router;
 
 
-// let fileTree = getAllFiles("F:/books");
+
 
 //Function that recursively lists all file in given directory
 getAllFiles = (dirPath, arrayOfFiles) =>{
@@ -58,10 +63,12 @@ getAllFiles = (dirPath, arrayOfFiles) =>{
             let book = new Book({
                 title:file.split('.').slice(0, -1).join('.'),
                 path:path.join( dirPath, "/", file),
-                category:null,
-                subCategory:null,
+                categories:null,
+                subTitle:null,
                 authors:null,
-                year:null
+                publisher:null,
+                year:null,
+                description:null
             }).save()
             .then(result=>{
               })

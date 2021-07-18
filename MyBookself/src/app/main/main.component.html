@@ -1,0 +1,8 @@
+<main class="container">
+  <article *ngFor="let book of books" class="cell">
+    <h1 class="title">
+      {{book.title}}
+    </h1>
+    <img class="image" [src]="imagePlaceholder" alt="{{book.title}}">
+  </article>
+</main>

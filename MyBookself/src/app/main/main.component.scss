@@ -1,0 +1,35 @@
+.container
+{
+  display: grid;
+  margin: auto;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: max-content;
+  width: 60vw;
+  row-gap: 32px;
+}
+
+.cell{
+  grid-column: auto;
+  grid-row: auto;
+  display: inline-grid;
+  border: 1px solid black;
+  border-radius: 10px;
+  justify-items: center;
+  flex-direction: column;
+  width: max-content;
+  .title
+  {
+    width: 250px;
+    font-size: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    text-align: center;
+    word-break: break-all;
+  }
+  .image{
+    width: fit-content;
+    height: fit-content;
+    padding:8px;
+  }
+
+}

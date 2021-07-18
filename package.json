@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/AtaKon/bookself#readme",
   "dependencies": {
+    "@angular/cli": "^12.1.2",
     "axios": "^0.21.1",
     "chalk": "^4.1.1",
     "dotenv": "^10.0.0",
