@@ -47,6 +47,7 @@ module.exports=router;
 
 //Function that recursively lists all file in given directory
 getAllFiles = (dirPath, arrayOfFiles) =>{
+    
     files = fs.readdirSync(dirPath)
   
     arrayOfFiles = arrayOfFiles || []

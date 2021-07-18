@@ -10,7 +10,8 @@ const booksSchema = mongoose.Schema({
     publisher:{type:String,required:false},
     year:{type:Date,required:false},
     description:{type:String,required:false},
-    imageLink:{type:String,required:false}
+    imageLink:{type:String,required:false},
+    inFavourites:{type:Boolean,required:false,default:false}
   });
   
   module.exports = mongoose.model('Books',booksSchema);

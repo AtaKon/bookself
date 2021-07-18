@@ -1,0 +1,18 @@
+<p>{{book.title}}</p>
+<main class="container">
+  <aside class="book">
+    <h1 class="title">{{book.title}}</h1>
+    <img class="image" src="https://books.google.com/books/content?id=YemUDwAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api" alt="{{book.title}}">
+  </aside>
+  <section class="results">
+    <article class="res_row" *ngFor="let info of foundInfo">
+      <p class="title">{{info.volumeInfo.title}}</p>
+      <p class="categories">{{info.volumeInfo.categories}}</p>
+      <p class="subTitle">{{info.volumeInfo.subtitle}}</p>
+      <p class="authors">{{info.volumeInfo.authors}}</p>
+      <p class="publisher">{{info.volumeInfo.publisher}}</p>
+      <p class="year">{{info.volumeInfo.publishedDate}}</p>
+      <p class="description">{{info.volumeInfo.description}}</p>
+    </article>
+  </section>
+</main>

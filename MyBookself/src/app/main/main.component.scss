@@ -14,11 +14,15 @@
   display: inline-grid;
   border: 1px solid black;
   border-radius: 10px;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3,min-content);
   justify-items: center;
   flex-direction: column;
   width: max-content;
   .title
   {
+    grid-row: 1;
+    grid-column: 1;
     width: 250px;
     font-size: 16px;
     padding-left: 16px;
@@ -27,9 +31,59 @@
     word-break: break-all;
   }
   .image{
+    grid-row: 2;
+    grid-column: 1;
     width: fit-content;
     height: fit-content;
     padding:8px;
   }
+  .actions{
+    grid-column: 1;
+    grid-row: 3;
+    padding:8px;
+    display: flex;
+    gap: 16px;
+    .findInfo
+    {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: chartreuse;
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      width: 32px;
+      height: 32px;
+      svg{
+        width: 24px;
+        height: 24px;
+      }
+    }
+    .addTofavorites
+    {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border-radius: 10px;
+      outline: none;
+      border: none;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      width: 32px;
+      height: 32px;
+      svg
+      {
+        width: 24px;
+        height: 24px;
+      }
+      svg:hover{
+        fill: red;
+      }
+    }
+  }
 
 }
+
