@@ -6,6 +6,7 @@ const axios = require('axios');
 
 
 const Book=require('../models/books');
+const books = require('../models/books');
 
 //Array with the file extensions that the app supports
 //Will be filled by the database
@@ -22,11 +23,11 @@ router.get('/',(req,res,next)=>{
 });
 
 router.get('/getInfo/:name',(req,res,next) => {
-  console.log(process.env.key)
+  // console.log(process.env.key)
 
   axios.get('https://www.googleapis.com/books/v1/volumes?q='+req.params.name+'&key='+process.env.key)
   .then(response=>{
-   console.log(response.data)
+  //  console.log(response.data)
    res.status(200).json({message:'OK',books:response.data})
   }).catch(error=>{
     res.status(500).json({message:'Something is wrong!',books:error})
@@ -38,6 +39,29 @@ router.get('/getInfo/:name',(req,res,next) => {
 router.get('/fill',(req,res,next)=>{
   let fileTree = getAllFiles(process.env.path);
   res.status(200).json({message:"ok"})
+});
+
+
+router.post('/setInfo/',(req,res,next) => {
+  console.log(req.body)
+  let obj={
+    title:req.body.info.volumeInfo?.title ?? null,
+    categories:req.body.info.volumeInfo?.categories ?? null,
+    subTitle:req.body.info.volumeInfo?.subtitle ?? null,
+    authors:req.body.info.volumeInfo?.authors ?? null,
+    publisher:req.body.info.volumeInfo?.publisher ?? null,
+    year:req.body.info.volumeInfo?.publishedDate ?? null,
+    imageLink:req.body.info.volumeInfo?.imageLinks?.thumbnail ?? null,
+    description:req.body.volumeInfo?.description ?? null
+  }
+  books.findOneAndUpdate({_id:req.body.bookId},obj).then(result=>
+    res.status(200).json({ok:result})
+  )
+  .catch(error=>{
+    console.log(error)
+    res.status(500).json({error:error})
+  });
+  
 });
 
 module.exports=router;

@@ -1,4 +1,3 @@
-<p>{{book.title}}</p>
 <main class="container">
   <aside class="book">
     <h1 class="title">{{book.title}}</h1>
@@ -6,13 +5,14 @@
   </aside>
   <section class="results">
     <article class="res_row" *ngFor="let info of foundInfo">
-      <p class="title">{{info.volumeInfo.title}}</p>
-      <p class="categories">{{info.volumeInfo.categories}}</p>
-      <p class="subTitle">{{info.volumeInfo.subtitle}}</p>
-      <p class="authors">{{info.volumeInfo.authors}}</p>
-      <p class="publisher">{{info.volumeInfo.publisher}}</p>
-      <p class="year">{{info.volumeInfo.publishedDate}}</p>
-      <p class="description">{{info.volumeInfo.description}}</p>
+      <p class="title">{{info.volumeInfo.title || ' test'}}</p>
+      <p class="categories">{{info.volumeInfo.categories || ' test'}}</p>
+      <p class="subTitle">{{info.volumeInfo.subtitle || 'test '}}</p>
+      <p class="authors">{{info.volumeInfo.authors || 'test '}}</p>
+      <p class="publisher">{{info.volumeInfo.publisher || 'test '}}</p>
+      <p class="year">{{info.volumeInfo.publishedDate || ' test'}}</p>
+      <p class="description">{{info.volumeInfo.description || ' test'}}</p>
+      <div class="submit"><button (click)="setBookInfo(info,book)">Set book info</button></div>
     </article>
   </section>
 </main>

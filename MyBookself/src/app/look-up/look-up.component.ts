@@ -27,4 +27,13 @@ export class LookUpComponent implements OnInit {
     });
   }
 
+
+  setBookInfo(info:any,book:any)
+  {
+    let obj={info:info,bookId:book._id}
+    this.lookUpService.setBookInfo(obj).subscribe(result=>{
+      console.log(result)
+    });
+  }
+
 }

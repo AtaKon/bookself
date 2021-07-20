@@ -21,4 +21,10 @@ export class BookLookUpService {
     return this.http.get<any>('http://localhost:3000/api/books/getInfo/'+title);
   }
 
+
+  setBookInfo(info:any)
+  {
+    return this.http.post<any>('http://localhost:3000/api/books/setInfo/',info);
+  }
+
 }

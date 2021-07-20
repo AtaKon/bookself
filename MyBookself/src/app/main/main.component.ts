@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainService} from './main.service';
 import {BookLookUpService} from '../book-look-up.service';
 import { Router } from '@angular/router';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -19,7 +20,12 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.mainService.getBooksMain().subscribe(result=>{
       this.books=result.books;
-      console.log(result.books);
+      console.log(this.books)
+      this.books.forEach((element: { imageLink: string; }) => {
+        if(element.imageLink !== undefined && element.imageLink !== null){
+          element.imageLink=element.imageLink.replace("zoom=1","zoom=2")
+        }
+      });
     });
   }
 
