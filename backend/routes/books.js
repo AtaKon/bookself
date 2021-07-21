@@ -43,7 +43,6 @@ router.get('/fill',(req,res,next)=>{
 
 
 router.post('/setInfo/',(req,res,next) => {
-  console.log(req.body)
   let obj={
     title:req.body.info.volumeInfo?.title ?? null,
     categories:req.body.info.volumeInfo?.categories ?? null,
@@ -62,6 +61,20 @@ router.post('/setInfo/',(req,res,next) => {
     res.status(500).json({error:error})
   });
   
+});
+
+router.post('/addToFavorites/',(req,res,next) => {
+  let obj={
+    inFavourites:true
+  }
+
+  books.findByIdAndUpdate(req.body.id,obj).then(result=>{
+    console.log(result)
+    res.status(200).json({message:'ok'})
+  }).catch(error=>{
+    console.log(error)
+    res.status(500).json({message:'not ok'})
+  });
 });
 
 module.exports=router;

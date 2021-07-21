@@ -27,4 +27,9 @@ export class BookLookUpService {
     return this.http.post<any>('http://localhost:3000/api/books/setInfo/',info);
   }
 
+  addToFavorites(id:any)
+  {
+    console.log(id)
+    return this.http.post<any>('http://localhost:3000/api/books/addToFavorites/',id);
+  }
 }

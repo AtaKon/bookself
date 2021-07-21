@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import {BookLookUpService} from '../book-look-up.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-look-up',
@@ -16,7 +17,7 @@ export class LookUpComponent implements OnInit {
 
     foundInfo:any;
 
-  constructor(private lookUpService:BookLookUpService) { }
+  constructor(private lookUpService:BookLookUpService,private router:Router) { }
 
   ngOnInit(): void {
     this.subscription = this.lookUpService.currentBook.subscribe(book => this.book = book)
@@ -32,7 +33,7 @@ export class LookUpComponent implements OnInit {
   {
     let obj={info:info,bookId:book._id}
     this.lookUpService.setBookInfo(obj).subscribe(result=>{
-      console.log(result)
+      this.router.navigate(['/main'])
     });
   }
 

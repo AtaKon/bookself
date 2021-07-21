@@ -35,4 +35,11 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/lookUp']);
   }
 
+  addToFavorites(id:any){
+    let obj={id:id}
+    this.lookUpService.addToFavorites(obj).subscribe(result=>{
+      console.log(result);
+    });
+  }
+
 }
