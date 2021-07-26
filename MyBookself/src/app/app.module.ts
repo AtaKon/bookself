@@ -7,16 +7,21 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { LookUpComponent } from './look-up/look-up.component';
 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { BookReaderComponent } from './book-reader/book-reader.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
-    LookUpComponent
+    LookUpComponent,
+    BookReaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

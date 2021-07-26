@@ -20,7 +20,6 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.mainService.getBooksMain().subscribe(result=>{
       this.books=result.books;
-      console.log(this.books)
       this.books.forEach((element: { imageLink: string; }) => {
         if(element.imageLink !== undefined && element.imageLink !== null){
           element.imageLink=element.imageLink.replace("zoom=1","zoom=2")
@@ -40,6 +39,12 @@ export class MainComponent implements OnInit {
     this.lookUpService.addToFavorites(obj).subscribe(result=>{
       console.log(result);
     });
+  }
+
+  readBook(id:string)
+  {
+    this.mainService.changeBook(id);
+    this.router.navigate(['book']);
   }
 
 }

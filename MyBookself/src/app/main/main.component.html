@@ -1,5 +1,5 @@
 <main class="container">
-  <article *ngFor="let book of books" class="cell">
+  <article *ngFor="let book of books" class="cell" (click)="readBook(book._id)">
     <h1 class="title">
       {{book.title}}
     </h1>

@@ -77,6 +77,21 @@ router.post('/addToFavorites/',(req,res,next) => {
   });
 });
 
+
+router.post('/test/',(req,res,next) => {
+  console.log(req)
+  res.status(200).json({message:'ok'});
+});
+
+router.get('/getBook/:id',(req,res,next)=>{
+  books.findById(req.params.id).then(result=>{
+    res.sendFile(result.path);
+  })
+  .catch(error=>{
+    res.status(500);
+  }); 
+})
+
 module.exports=router;
 
 
