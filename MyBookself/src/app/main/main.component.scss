@@ -11,15 +11,37 @@
 .cell{
   grid-column: auto;
   grid-row: auto;
-  display: inline-grid;
+  display: grid;
   border: 1px solid black;
   border-radius: 10px;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3,min-content);
   justify-items: center;
   flex-direction: column;
-  width: max-content;
+  width:min-content;
+  height: min-content;
+  max-height: 522px;
   cursor: pointer;
+  overflow-y: hidden;
+
+  .overlay
+  {
+    display: flex;
+    opacity: 0;
+    grid-row: 1/5;
+    grid-column: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    padding: 16px;
+    transition: opacity 400ms ease-in-out;
+    div{
+      display: grid;
+      width:inherit;
+      height: inherit;
+      color:white;
+    }
+  }
+
   .title
   {
     grid-row: 1;
@@ -86,5 +108,8 @@
     }
   }
 
+}
+.cell:hover .overlay{
+  opacity: 1;
 }
 

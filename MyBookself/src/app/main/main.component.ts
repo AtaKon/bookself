@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainService} from './main.service';
 import {BookLookUpService} from '../book-look-up.service';
 import { Router } from '@angular/router';
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -15,6 +15,7 @@ export class MainComponent implements OnInit {
     private router:Router) { }
 
   books:any;
+  description=false;
   imagePlaceholder:string="https://books.google.com/books/content?id=YemUDwAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api";
 
   ngOnInit(): void {
@@ -23,6 +24,7 @@ export class MainComponent implements OnInit {
       this.books.forEach((element: { imageLink: string; }) => {
         if(element.imageLink !== undefined && element.imageLink !== null){
           element.imageLink=element.imageLink.replace("zoom=1","zoom=2")
+          element.imageLink=element.imageLink.replace("http","https")
         }
       });
     });
@@ -46,5 +48,13 @@ export class MainComponent implements OnInit {
     this.mainService.changeBook(id);
     this.router.navigate(['book']);
   }
-
+  toogleDescription()
+  {
+    this.description=true;
+    console.log("test")
+  }
+  toogleDescriptionOff()
+  {
+    this.description=false;
+  }
 }

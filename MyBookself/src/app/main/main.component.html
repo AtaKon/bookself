@@ -1,5 +1,6 @@
 <main class="container">
-  <article *ngFor="let book of books" class="cell" (click)="readBook(book._id)">
+  <article *ngFor="let book of books" class="cell" (click)="readBook(book._id)" >
+   <div *ngIf="book.description" class="overlay"><div>{{book.description}}</div></div>
     <h1 class="title">
       {{book.title}}
     </h1>

@@ -51,7 +51,7 @@ router.post('/setInfo/',(req,res,next) => {
     publisher:req.body.info.volumeInfo?.publisher ?? null,
     year:req.body.info.volumeInfo?.publishedDate ?? null,
     imageLink:req.body.info.volumeInfo?.imageLinks?.thumbnail ?? null,
-    description:req.body.volumeInfo?.description ?? null
+    description:req.body.info.volumeInfo?.description ?? null
   }
   books.findOneAndUpdate({_id:req.body.bookId},obj).then(result=>
     res.status(200).json({ok:result})
