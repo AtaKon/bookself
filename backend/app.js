@@ -2,11 +2,17 @@ require('dotenv').config();
 const express = require('express');
 const mongoose =require('mongoose');
 const chalk = require('chalk');
+const session = require("express-session")
+const passport = require('passport');
+
+
+require('./auth/auth');
 
 const log = console.log;
 
 //Routes
 const booksRoute=require('./routes/books');
+const user = require('./routes/user');
 
 const app = express();
 
@@ -22,6 +28,13 @@ mongoose.connect(process.env.mongoURL,{ useNewUrlParser: true,useFindAndModify: 
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(session({
+                  secret: "secret",
+                  resave: true,
+                  saveUninitialized: true}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req,res,next)=>{
   res.setHeader('Access-Control-Allow-Origin','*');
@@ -32,7 +45,9 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.use("/api/books",booksRoute);
+app.use("/api/books",passport.authenticate('jwt',{session:false}),booksRoute);
+
+app.use("/user",user);
 
 
 module.exports=app;

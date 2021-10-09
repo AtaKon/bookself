@@ -24,10 +24,16 @@
   "homepage": "https://github.com/AtaKon/bookself#readme",
   "dependencies": {
     "@angular/cli": "^12.1.2",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
     "chalk": "^4.1.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.13.2"
+    "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.2",
+    "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   }
 }

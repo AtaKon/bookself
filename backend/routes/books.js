@@ -15,6 +15,7 @@ let acceptedExtenstions=["pdf","epub"];
 const router = express.Router();
 
 router.get('/',(req,res,next)=>{
+
     Book.find().then((response)=>{
         res.status(200).json({message:"All good bro!",books:response});
     }).catch((error)=>{
@@ -78,7 +79,7 @@ router.post('/addToFavorites/',(req,res,next) => {
 });
 
 
-router.post('/test/',(req,res,next) => {
+router.get('/test/',(req,res,next) => {
   console.log(req)
   res.status(200).json({message:'ok'});
 });
