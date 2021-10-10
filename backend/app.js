@@ -4,6 +4,7 @@ const mongoose =require('mongoose');
 const chalk = require('chalk');
 const session = require("express-session")
 const passport = require('passport');
+const cors = require('cors');
 
 
 require('./auth/auth');
@@ -35,6 +36,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 app.use((req,res,next)=>{
   res.setHeader('Access-Control-Allow-Origin','*');

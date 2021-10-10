@@ -1,0 +1,33 @@
+<div class="loginCardContainer">
+  <mat-card class="example-card">
+    <mat-card-title>Login</mat-card-title>
+
+    <mat-card-content>
+      <p>Login to access your virtual bookself</p>
+      <mat-divider inset></mat-divider>
+      <br>
+      <form class="loginInputsContainer" [formGroup]="loginForm">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" formControlName="username" required  autocomplete="username">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required formControlName="password" autocomplete="current-password">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-hint *ngIf="!passwordInput">Enter your password</mat-hint>
+          </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <br>
+    <mat-card-actions class="actions">
+      <button mat-raised-button color="primary" [disabled]="" (click)="login()">Login</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    </mat-card-footer>
+  </mat-card>
+
+</div>
