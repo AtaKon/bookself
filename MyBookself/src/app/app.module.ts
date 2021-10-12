@@ -22,6 +22,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { LazyImgDirective } from './lazy-img.directive';
+
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import {MatIconModule} from '@angular/material/icon';
     MainComponent,
     LookUpComponent,
     BookReaderComponent,
-    LoginComponent
+    LoginComponent,
+    LazyImgDirective
   ],
   imports: [
     BrowserModule,

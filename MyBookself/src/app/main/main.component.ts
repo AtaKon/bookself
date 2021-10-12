@@ -43,6 +43,21 @@ export class MainComponent implements OnInit {
     });
   }
 
+
+  descriptionShortener(input:string)
+  {
+    if(!input){
+      return ''
+    }
+    var n = input.split(" ");
+    if(n.length>40)
+    {
+      return n.slice(0,39).join(' ')+' ...';
+    }else{
+      return input
+    }
+  }
+
   readBook(id:string)
   {
     this.mainService.changeBook(id);
