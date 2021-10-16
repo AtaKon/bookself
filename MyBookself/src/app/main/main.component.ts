@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MainService} from './main.service';
 import {BookLookUpService} from '../book-look-up.service';
 import { Router } from '@angular/router';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-main',
@@ -16,11 +17,28 @@ export class MainComponent implements OnInit {
 
   books:any;
   description=false;
+  retOfBooks:any;
+  pageSizeOptions: number[] = [21, 42, 84, 108];
+  pageSize?:number;
+  length?:number;
+
+  // MatPaginator Output
+  pageEvent?: PageEvent;
+
   imagePlaceholder:string="https://books.google.com/books/content?id=YemUDwAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&source=gbs_api";
 
   ngOnInit(): void {
-    this.mainService.getBooksMain().subscribe(result=>{
-      this.books=result.books;
+    this.getBooks()
+
+  }
+
+  public getBooks(event?:PageEvent){
+
+    this.mainService.getBooksMain(event).subscribe(result=>{
+      console.log(result)
+      this.length=result.books.totalDocs
+      this.pageSize=result.books.limit
+      this.books=result.books.docs;
       this.books.forEach((element: { imageLink: string; }) => {
         if(element.imageLink !== undefined && element.imageLink !== null){
           element.imageLink=element.imageLink.replace("zoom=1","zoom=2")
@@ -28,6 +46,7 @@ export class MainComponent implements OnInit {
         }
       });
     });
+    return event;
   }
 
   lookUp(book:any){

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 
 const booksSchema = mongoose.Schema({
@@ -11,9 +12,12 @@ const booksSchema = mongoose.Schema({
     year:{type:Date,required:false},
     description:{type:String,required:false},
     imageLink:{type:String,required:false},
-    inFavourites:{type:Boolean,required:false,default:false}
+    inFavourites:{type:Boolean,required:false,default:false},
+    edited:{type:Boolean,required:true,default:false}
   });
   
+booksSchema.plugin(aggregatePaginate)
+
   module.exports = mongoose.model('Books',booksSchema);
   
 

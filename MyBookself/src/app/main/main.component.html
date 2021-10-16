@@ -15,4 +15,18 @@
       <button mat-button class="addTofavorites" (click)="addToFavorites(book._id)"><mat-icon [ngStyle]="{'fill' : book.inFavourites == true ? 'red': '' }">favorite_border</mat-icon></button>
     </mat-card-actions>
   </mat-card>
-
+  </main>
+<section class="pager">
+  <mat-paginator [length]="length"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = getBooks($event)"
+               aria-label="Select page">
+</mat-paginator>
+<!-- <div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
+</div> -->
+</section>

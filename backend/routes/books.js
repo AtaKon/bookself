@@ -15,8 +15,13 @@ let acceptedExtenstions=["pdf","epub"];
 const router = express.Router();
 
 router.get('/',(req,res,next)=>{
-
-    Book.find().then((response)=>{
+    let page=parseInt(req.query.page)
+    if(page==0)
+    {
+      page+=1
+    }
+    var aggeratedBooks=Book.aggregate([ { "$sort": { "edited": -1 }}])
+    Book.aggregatePaginate(aggeratedBooks,{limit:parseInt(req.query.limit),page:page}).then((response)=>{
         res.status(200).json({message:"All good bro!",books:response});
     }).catch((error)=>{
         res.status(500).json({message:"Something went wrong!",error:error});
@@ -52,7 +57,8 @@ router.post('/setInfo/',(req,res,next) => {
     publisher:req.body.info.volumeInfo?.publisher ?? null,
     year:req.body.info.volumeInfo?.publishedDate ?? null,
     imageLink:req.body.info.volumeInfo?.imageLinks?.thumbnail ?? null,
-    description:req.body.info.volumeInfo?.description ?? null
+    description:req.body.info.volumeInfo?.description ?? null,
+    edited:true
   }
   books.findOneAndUpdate({_id:req.body.bookId},obj).then(result=>
     res.status(200).json({ok:result})

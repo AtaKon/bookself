@@ -12,9 +12,13 @@ export class MainService {
 
   constructor(private http:HttpClient) { }
 
-  getBooksMain()
+  getBooksMain(input:any)
   {
-    return this.http.get<any>('http://localhost:3000/api/books/');
+    if(input){
+      return this.http.get<any>('http://localhost:3000/api/books/?limit='+input.pageSize+'&page='+input.pageIndex);
+    }else{
+      return this.http.get<any>('http://localhost:3000/api/books/?limit=21&page=1');
+    }
   }
 
   getBook(id:string)
