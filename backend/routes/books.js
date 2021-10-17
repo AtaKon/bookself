@@ -48,6 +48,12 @@ router.get('/fill',(req,res,next)=>{
 });
 
 
+router.get('/scanLibrary',async (req,res,next)=>{
+  let scannedFileTree = await scanFiles('F:\\books')
+  res.status(200).json({message:"ok"})
+})
+
+
 router.post('/setInfo/',(req,res,next) => {
   let obj={
     title:req.body.info.volumeInfo?.title ?? null,
@@ -141,5 +147,48 @@ getAllFiles = (dirPath, arrayOfFiles) =>{
     })
   
     return arrayOfFiles
+
+}
+
+
+scanFiles = async (dirPath, arrayOfFiles) =>{
+
+  let booksList = await books.find()
+    
+  files = fs.readdirSync(dirPath)
+
+  arrayOfFiles = arrayOfFiles || []
+
+  files.forEach((file)=>{
+      //If file is directory call the same function again
+    if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+      arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
+    } else {
+        //If file and is contained in the supported extensions array push it to the array of files that the function returns
+      let f=path.extname(file).split('.')[1]
+      if(acceptedExtenstions.indexOf(f)>-1){
+          arrayOfFiles.push(path.join( dirPath, "/", file))
+          if(!booksList.some(x=>x.path===path.join( dirPath, "/", file))){
+            let book = new Book({
+              title:file.split('.').slice(0, -1).join('.'),
+              path:path.join( dirPath, "/", file),
+              categories:null,
+              subTitle:null,
+              authors:null,
+              publisher:null,
+              year:null,
+              description:null
+          }).save()
+          .then(result=>{
+            })
+            .catch(error=>{
+              console.log(error);
+            });
+          }   
+      }
+    }
+  })
+
+  return arrayOfFiles
 
 }

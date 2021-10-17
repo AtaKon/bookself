@@ -21,6 +21,11 @@ export class MainService {
     }
   }
 
+  scanLibrary()
+  {
+    return this.http.get<any>('http://localhost:3000/api/books/scanLibrary');
+  }
+
   getBook(id:string)
   {
     const httpOptions = {

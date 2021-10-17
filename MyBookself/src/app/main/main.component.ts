@@ -3,6 +3,7 @@ import {MainService} from './main.service';
 import {BookLookUpService} from '../book-look-up.service';
 import { Router } from '@angular/router';
 import {PageEvent} from '@angular/material/paginator';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main',
@@ -60,6 +61,13 @@ export class MainComponent implements OnInit {
     this.lookUpService.addToFavorites(obj).subscribe(result=>{
       console.log(result);
     });
+  }
+
+  scanLibrary(){
+    this.mainService.scanLibrary().subscribe(result=>{
+      this.getBooks(this.pageEvent)
+    })
+
   }
 
 
