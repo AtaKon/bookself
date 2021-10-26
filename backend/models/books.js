@@ -12,7 +12,7 @@ const booksSchema = mongoose.Schema({
     year:{type:Date,required:false},
     description:{type:String,required:false},
     imageLink:{type:String,required:false},
-    inFavourites:{type:Boolean,required:false,default:false},
+    inFavourites:{type:[String],required:false},
     edited:{type:Boolean,required:true,default:false}
   });
   

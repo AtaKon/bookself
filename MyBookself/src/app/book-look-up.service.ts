@@ -32,4 +32,9 @@ export class BookLookUpService {
     console.log(id)
     return this.http.post<any>('http://localhost:3000/api/books/addToFavorites/',id);
   }
+
+  removeFromFavorites(obj:any)
+  {
+    return this.http.post<any>('http://localhost:3000/api/books/removeFromFavorites/',obj);
+  }
 }

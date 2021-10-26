@@ -22,6 +22,7 @@ export class MainComponent implements OnInit {
   pageSizeOptions: number[] = [21, 42, 84, 108];
   pageSize?:number;
   length?:number;
+  userId?:string;
 
   // MatPaginator Output
   pageEvent?: PageEvent;
@@ -30,7 +31,8 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.getBooks()
-
+    let user=JSON.parse(localStorage.getItem('currentUser')as string)
+    this.userId=user.user._id
   }
 
   public getBooks(event?:PageEvent){
@@ -56,11 +58,29 @@ export class MainComponent implements OnInit {
     this.router.navigate(['/lookUp']);
   }
 
-  addToFavorites(id:any){
-    let obj={id:id}
-    this.lookUpService.addToFavorites(obj).subscribe(result=>{
-      console.log(result);
-    });
+  favManager(book:any){
+    let inFav
+    let obj={id:book._id,userId:this.userId}
+    if(book.inFavourites.includes(this.userId)){
+      this.lookUpService.removeFromFavorites(obj).subscribe(result=>{
+        inFav=result.inFav
+        book.inFavourites=inFav
+        let gInd=this.books.find((x:any)=>x._id===book._id)
+        let ind=this.books.indexOf(gInd)
+        this.books[ind]=book;
+      });
+    }else{
+      this.lookUpService.addToFavorites(obj).subscribe(result=>{
+        inFav=result.inFav
+        book.inFavourites=inFav
+        let gInd=this.books.find((x:any)=>x._id===book._id)
+        let ind=this.books.indexOf(gInd)
+        this.books[ind]=book;
+      });
+    }
+
+
+
   }
 
   scanLibrary(){

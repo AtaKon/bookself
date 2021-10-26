@@ -33,7 +33,6 @@ router.get('/getInfo/:name',(req,res,next) => {
 
   axios.get('https://www.googleapis.com/books/v1/volumes?q='+req.params.name+'&key='+process.env.key)
   .then(response=>{
-  //  console.log(response.data)
    res.status(200).json({message:'OK',books:response.data})
   }).catch(error=>{
     res.status(500).json({message:'Something is wrong!',books:error})
@@ -43,7 +42,7 @@ router.get('/getInfo/:name',(req,res,next) => {
 });
 
 router.get('/fill',(req,res,next)=>{
-  let fileTree = getAllFiles(process.env.path);
+  let fileTree = getAllFiles('F:\\books');
   res.status(200).json({message:"ok"})
 });
 
@@ -77,15 +76,23 @@ router.post('/setInfo/',(req,res,next) => {
 });
 
 router.post('/addToFavorites/',(req,res,next) => {
-  let obj={
-    inFavourites:true
-  }
 
-  books.findByIdAndUpdate(req.body.id,obj).then(result=>{
-    console.log(result)
-    res.status(200).json({message:'ok'})
+  books.findByIdAndUpdate(req.body.id,{$push:{inFavourites:req.body.userId}},{new:true}).then(result=>{
+    // console.log(result)
+    res.status(200).json({message:'ok',inFav:result.inFavourites})
   }).catch(error=>{
-    console.log(error)
+    // console.log(error)
+    res.status(500).json({message:'not ok'})
+  });
+});
+
+router.post('/removeFromFavorites/',(req,res,next) => {
+
+  books.findByIdAndUpdate(req.body.id,{$pull:{inFavourites:req.body.userId}},{new:true}).then(result=>{
+    // console.log(result)
+    res.status(200).json({message:'ok',inFav:result.inFavourites})
+  }).catch(error=>{
+    // console.log(error)
     res.status(500).json({message:'not ok'})
   });
 });
